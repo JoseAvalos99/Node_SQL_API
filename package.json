@@ -1,0 +1,18 @@
+{
+  "name": "api_users",
+  "version": "1.0.0",
+  "description": "A simple API with node and sql server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Helena",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mssql": "^6.2.3",
+    "nodemon": "^2.0.5"
+  }
+}
