@@ -33,7 +33,11 @@ async function addUser(user) {
             .input('Email', sql.NVarChar(50), user.Email)
             .input('Password', sql.NVarChar(50), user.Password)
             .input('Phone', sql.NVarChar(50), user.Phone)
-            .execute('InsertUser')
+            .execute('InsertUser');
+        if (userBD.recordset)
+            return {
+                error: userBD.recordset[0]['MessageError']
+            }
         return {
             Id: userBD.recordset[0]['Id'],
             NameUser: user.NameUser,
@@ -82,11 +86,29 @@ async function deleteUser(userId) {
         console.log(error);
     }
 }
+async function loginUser(email, password) {
+    try {
+        let pool = await sql.connect(config);
+        let userDB = await pool.request()
+            .input('Email', sql.NVarChar, email)
+            .input('Password', sql.NVarChar, password)
+            .execute('LoginUser');
+        if (userDB.recordset[0]['MessageError']) {
+            return {
+                Error: userDB.recordset[0]['MessageError']
+            }
+        }
+        return userDB.recordset;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
     getUsers: getUsers,
     getUserById: getUserById,
     addUser: addUser,
     editUser: editUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    loginUser: loginUser
 }

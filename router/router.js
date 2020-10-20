@@ -8,6 +8,7 @@ router.get("/Users/:id", usersController.getById);
 router.post("/Users", usersController.postUser);
 router.put("/Users/:id", usersController.putUser);
 router.delete("/Users/:id", usersController.deleteUser);
+router.post("/Users/Login", usersController.loginUser);
 
 router.get("/", (req, res) => {
     res.send("Hola, Sean Todxs Bienvenidxs");

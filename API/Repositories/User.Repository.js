@@ -17,5 +17,8 @@ class UserRepository {
     async deleteUser(id) {
         return await dbOperations.deleteUser(id);
     }
+    async loginUser(email, password) {
+        return await dbOperations.loginUser(email, password);
+    }
 }
 module.exports = UserRepository;

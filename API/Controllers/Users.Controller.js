@@ -42,5 +42,13 @@ class UsersController {
             console.log(error);
         }
     }
+    async loginUser(req, res) {
+        try {
+            let userLogin = await userRepository.loginUser(req.body.Email, req.body.Password);
+            res.send(userLogin);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 module.exports = UsersController

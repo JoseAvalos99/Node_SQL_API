@@ -1,4 +1,4 @@
-CREATE PROCEDURE InsertUser
+ALTER PROCEDURE InsertUser
     (
     @Name NVARCHAR(200),
     @LastName NVARCHAR(200),
@@ -8,9 +8,12 @@ CREATE PROCEDURE InsertUser
 AS
 BEGIN
     SET NOCOUNT ON
-    INSERT INTO Users
-    OUTPUT
-    inserted.Id
-    VALUES
-        (@Name, @LastName, @Email, @Password, @Phone)
+    IF NOT EXISTS (SELECT Id from Users where Email = @Email)
+        INSERT INTO Users
+        OUTPUT
+        inserted.Id
+        VALUES
+            (@Name, @LastName, @Email, @Password, @Phone)
+    ELSE
+       Select 'Ya existe un usuario con ese correo' AS MessageError
 END
