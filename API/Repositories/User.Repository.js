@@ -1,4 +1,5 @@
 const dbOperations = require('../../DataBase/Operations/Users.dbOperations');
+const crypto = require('crypto');
 
 class UserRepository {
     async getAll() {
@@ -20,5 +21,6 @@ class UserRepository {
     async loginUser(email, password) {
         return await dbOperations.loginUser(email, password);
     }
+
 }
 module.exports = UserRepository;
